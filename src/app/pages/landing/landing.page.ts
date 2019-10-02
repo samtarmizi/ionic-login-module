@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, MenuController, NavController } from '@ionic/angular';
-import { RegisterPage } from '../auth/register/register.page';
+// import { RegisterPage } from '../auth/register/register.page';
 import { LoginPage } from '../auth/login/login.page';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -33,16 +33,17 @@ export class LandingPage implements OnInit {
   }
 
   async register() {
-    const registerModal = await this.modalController.create({
-      component: RegisterPage
-    });
-    return await registerModal.present();
+    this.navCtrl.navigateForward('register');
+    // const registerModal = await this.modalController.create({
+    //   component: RegisterPage
+    // });
+    // return await registerModal.present();
   }
 
   async login() {
-    const loginModal = await this.modalController.create({
-      component: LoginPage,
-    });
-    return await loginModal.present();
+    // const loginModal = await this.modalController.create({
+    //   component: LoginPage,
+    // });
+    // return await loginModal.present();
   }
 }

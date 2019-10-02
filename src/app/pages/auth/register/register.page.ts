@@ -12,6 +12,8 @@ import { AlertService } from 'src/app/services/alert.service';
 })
 export class RegisterPage implements OnInit {
 
+  data:any={};
+
   constructor(private modalController: ModalController,
     private authService: AuthService,
     private navCtrl: NavController,
@@ -35,28 +37,34 @@ export class RegisterPage implements OnInit {
     return await loginModal.present();
   }
 
-  register(form: NgForm) {
-    this.authService.register( form.value.name, form.value.email, form.value.password).subscribe(
-      data => {
-        this.authService.login(form.value.email, form.value.password).subscribe(
-          data => {
-          },
-          error => {
-            console.log(error);
-          },
-          () => {
-            this.dismissRegister();
-            this.navCtrl.navigateRoot('/dashboard');
-          }
-        );
-        this.alertService.presentToast(data['message']);
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
+  async register() {
+    await this.authService.register( this.data.name, this.data.email, this.data.password, this.data.c_password)
+    .then(async data => {
+        // this.navCtrl.navigateRoot('dashboard');
+        // console.log('data xyz',await data);
+        alert(JSON.stringify(data));
+
+        // await this.authService.login(form.value.email, form.value.password).subscribe(
+        //   async data => {
+        //     await this.dismissRegister();
+        //     await this.navCtrl.navigateRoot('/dashboard');
+        //   },
+        //   async error => {
+        //     await console.log(error);
+        //   },
+        //   // async () => {
+            
+        //   // }
+        // );
+        // await this.alertService.presentToast(data['message']);
+      },err=>{
+        console.log("ERRor",err);
+      })
+      // error => {
+      //   console.log("errorx",error);
+      // },
+      // () => {
         
-      }
-    );
+      // }
   }
 }

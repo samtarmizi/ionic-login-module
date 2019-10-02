@@ -38,10 +38,43 @@ export class AuthService {
     );
   }
 
-  register(name: String, email: String, password: String) {
-    return this.http.post('https://mizi.monster/api/register',
-      {name: name, email: email, password: password}
-    )
+  register(name: String, email: String, password: String, c_password: String) {
+
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
+    });
+
+    let options ={
+      headers: httpHeaders
+    };
+
+//     var form = new FormData();
+// form.append("name", "Mizi");
+// form.append("email", "realrizisanui@gmail.com");
+// form.append("password", "12345678");
+// form.append("c_password", "12345678");
+    let body={
+      name:name,
+      email:email,
+      password:password,
+      c_password:c_password
+    }
+
+  
+
+    return new Promise((resolve,reject)=>{
+      this.http.post('https://mizi.monster/api/register',body,options)
+      .subscribe(res=>{
+        console.log(res);
+        resolve(res)
+      },err=>{
+        reject(err);
+      })
+    })
+    
+      // {name: name, email: email, password: password, c_password: c_password}
+    
   }
   logout() {
     const headers = new HttpHeaders({
