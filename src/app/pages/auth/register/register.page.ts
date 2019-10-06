@@ -59,7 +59,9 @@ export class RegisterPage implements OnInit {
         // );
         // await this.alertService.presentToast(data['message']);
       },err=>{
-        console.log("ERRor",err);
+        //console.log("ERRor",err);
+        //alert(JSON.stringify(err.error.data.email));
+        this.alertService.presentToast(err.error.data.email);
       })
       // error => {
       //   console.log("errorx",error);

@@ -70,6 +70,7 @@ export class AuthService {
         resolve(res)
       },err=>{
         reject(err);
+        
       })
     })
     
