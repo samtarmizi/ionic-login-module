@@ -42,7 +42,8 @@ export class RegisterPage implements OnInit {
     .then(async data => {
         // this.navCtrl.navigateRoot('dashboard');
         // console.log('data xyz',await data);
-        alert(JSON.stringify(data));
+        //alert(JSON.stringify(data));
+        this.alertService.presentToast("Registered");
 
         // await this.authService.login(form.value.email, form.value.password).subscribe(
         //   async data => {
