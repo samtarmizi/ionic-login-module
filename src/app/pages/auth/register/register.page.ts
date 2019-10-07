@@ -66,17 +66,23 @@ export class RegisterPage implements OnInit {
         //err.error.data = this.data;
         //this.data = err.error.data;
         if(err.error.data.email == null){
-          err.error.data.email = "Email OK";
+          err.error.data.email = "";
         }
+        else{
+          err.error.data.email = "Please check your email credentials. We believe the credentials has been taken."
+        }
+
         if(err.error.data.c_password == null){
-          err.error.data.c_password = "Confirm Password OK";
+          err.error.data.c_password = "";
+        }
+        else{
+          err.error.data.c_password = "Please check your confirmation password. We believe the password has slightly different for our confirmation.";
         }
 
         this.alertService.presentToast(
-                    err.error.message + '<br/>The error:<br/> ' +
-                    err.error.data.email + '<br/>' +
-                    err.error.data.c_password 
-                      );
+                    err.error.message + '<br/>The error:<br/><br/>' +
+                    err.error.data.email + '<br/><br/>' +
+                    err.error.data.c_password);
         //this.alertService.presentToast(err.error.data.email);
         //this.alertService.presentToast(err.error.data.c_password);
       })

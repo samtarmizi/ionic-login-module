@@ -58,7 +58,7 @@ export class LoginPage implements OnInit {
         // await this.alertService.presentToast(data['message']);
       },err=>{
         //console.log("ERRor",err);
-        alert(JSON.stringify(err));
+        //alert(JSON.stringify(err));
         //err.error.data = this.data;
         //this.data = err.error.data;
         // if(err.error.data.email == null){
@@ -68,11 +68,11 @@ export class LoginPage implements OnInit {
         //   err.error.data.c_password = "Confirm Password OK";
         // }
 
-        // this.alertService.presentToast(
-        //             err.error.message + '<br/>The error:<br/> ' +
-        //             err.error.data.email + '<br/>' +
-        //             err.error.data.c_password 
-        //               );
+        this.alertService.presentToast(
+                    err.error.error + '<br/>' +
+                    err.error.error_description + '<br/>' +
+                    err.error.message 
+                      );
         //this.alertService.presentToast(err.error.data.email);
         //this.alertService.presentToast(err.error.data.c_password);
       })

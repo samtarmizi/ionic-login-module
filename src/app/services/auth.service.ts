@@ -52,7 +52,7 @@ export class AuthService {
         resolve(res)
       },err=>{
         reject(err);
-          alert(JSON.stringify(err));
+          //alert(JSON.stringify(err));
         
       })
     })
