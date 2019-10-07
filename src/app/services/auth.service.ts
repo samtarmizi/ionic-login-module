@@ -20,22 +20,46 @@ export class AuthService {
   ) { }
   
   login(email: String, password: String) {
-    return this.http.post(this.env.API_URL + '/oauth/token',
-      {email: email, password: password}
-    ).pipe(
-      tap(token => {
-        this.storage.setItem('token', token)
-        .then(
-          () => {
-            console.log('Token Stored');
-          },
-          error => console.error('Error storing item', error)
-        );
-        this.token = token;
-        this.isLoggedIn = true;
-        return token;
-      }),
-    );
+
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
+    });
+
+    let options ={
+      headers: httpHeaders
+    };
+
+//     var form = new FormData();
+// form.append("name", "Mizi");
+// form.append("email", "realrizisanui@gmail.com");
+// form.append("password", "12345678");
+// form.append("c_password", "12345678");
+    let body={
+      username:email,
+      password:password,
+      grant_type: "password",
+      client_id: "2",
+      client_secret: "DyEdXq67JVPez9ln6WL7gTwBPwC6gX1yKF63M52I"
+    }
+
+  
+
+    return new Promise((resolve,reject)=>{
+      this.http.post('https://mizi.monster/oauth/token',body,options)
+      .subscribe(res=>{
+        console.log(res);
+        resolve(res)
+      },err=>{
+        reject(err);
+          alert(JSON.stringify(err));
+        
+      })
+    })
+    
+      // {name: name, email: email, password: password, c_password: c_password}
+    
+    
   }
 
   register(name: String, email: String, password: String, c_password: String) {
@@ -70,6 +94,7 @@ export class AuthService {
         resolve(res)
       },err=>{
         reject(err);
+        //alert(JSON.stringify(err));
         
       })
     })

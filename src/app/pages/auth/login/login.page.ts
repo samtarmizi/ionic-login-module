@@ -10,6 +10,8 @@ import { AlertService } from 'src/app/services/alert.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+  data:any={};
   
   constructor(
     private modalController: ModalController,
@@ -31,18 +33,54 @@ export class LoginPage implements OnInit {
     });
     return await registerModal.present();
   }
-  login(form: NgForm) {
-    this.authService.login(form.value.email, form.value.password).subscribe(
-      data => {
-        this.alertService.presentToast("Logged In");
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        this.dismissLogin();
-        this.navCtrl.navigateRoot('/dashboard');
-      }
-    );
+
+  async login() {
+    await this.authService.login( this.data.email, this.data.password)
+    .then(async data => {
+        // this.navCtrl.navigateRoot('dashboard');
+        // console.log('data xyz',await data);
+        // alert(JSON.stringify(data));
+        this.alertService.presentToast("Login" );
+        //this.alertService.presentToast(data);
+
+        // await this.authService.login(form.value.email, form.value.password).subscribe(
+        //   async data => {
+        //     await this.dismissRegister();
+        //     await this.navCtrl.navigateRoot('/dashboard');
+        //   },
+        //   async error => {
+        //     await console.log(error);
+        //   },
+        //   // async () => {
+            
+        //   // }
+        // );
+        // await this.alertService.presentToast(data['message']);
+      },err=>{
+        //console.log("ERRor",err);
+        alert(JSON.stringify(err));
+        //err.error.data = this.data;
+        //this.data = err.error.data;
+        // if(err.error.data.email == null){
+        //   err.error.data.email = "Email OK";
+        // }
+        // if(err.error.data.c_password == null){
+        //   err.error.data.c_password = "Confirm Password OK";
+        // }
+
+        // this.alertService.presentToast(
+        //             err.error.message + '<br/>The error:<br/> ' +
+        //             err.error.data.email + '<br/>' +
+        //             err.error.data.c_password 
+        //               );
+        //this.alertService.presentToast(err.error.data.email);
+        //this.alertService.presentToast(err.error.data.c_password);
+      })
+      // error => {
+      //   console.log("errorx",error);
+      // },
+      // () => {
+        
+      // }
   }
 }

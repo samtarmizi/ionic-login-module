@@ -5,21 +5,20 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <form #form="ngForm" (ngSubmit)="login(form)" method="post">
+  <!-- <form #form="ngForm" (ngSubmit)="login(form)" method="post"> -->
     <ion-item>
       <ion-label position="floating">Email</ion-label>
-      <ion-input ngModel type="email" name="email"></ion-input>
+      <ion-input type="email" [(ngModel)]="data.email"></ion-input>
     </ion-item>
   
     <ion-item>
       <ion-label position="floating">Password</ion-label>
-      <ion-input ngModel type="password" name="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="data.password"></ion-input>
     </ion-item>
   
     <p class="ion-text-center">Forgot Password?</p>
   
-    <ion-button type="submit" expand="full" color="primary">Login</ion-button>
-  </form>
+    <ion-button expand="full" color="danger" (click)="login()">Login</ion-button>  <!-- </form> -->
   <p class="ion-text-center">Don't have a account?</p>
-  <ion-button expand="full" color="danger" (click)="registerModal()">Register</ion-button>
+  <ion-button expand="full" color="primary" (click)="registerModal()">Register</ion-button>
 </ion-content>

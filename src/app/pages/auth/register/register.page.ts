@@ -13,6 +13,7 @@ import { AlertService } from 'src/app/services/alert.service';
 export class RegisterPage implements OnInit {
 
   data:any={};
+  
 
   constructor(private modalController: ModalController,
     private authService: AuthService,
@@ -42,8 +43,9 @@ export class RegisterPage implements OnInit {
     .then(async data => {
         // this.navCtrl.navigateRoot('dashboard');
         // console.log('data xyz',await data);
-        //alert(JSON.stringify(data));
-        this.alertService.presentToast("Registered");
+        // alert(JSON.stringify(data));
+        this.alertService.presentToast("Registered" );
+        //this.alertService.presentToast(data);
 
         // await this.authService.login(form.value.email, form.value.password).subscribe(
         //   async data => {
@@ -61,7 +63,22 @@ export class RegisterPage implements OnInit {
       },err=>{
         //console.log("ERRor",err);
         //alert(JSON.stringify(err.error.data.email));
-        this.alertService.presentToast(err.error.data.email);
+        //err.error.data = this.data;
+        //this.data = err.error.data;
+        if(err.error.data.email == null){
+          err.error.data.email = "Email OK";
+        }
+        if(err.error.data.c_password == null){
+          err.error.data.c_password = "Confirm Password OK";
+        }
+
+        this.alertService.presentToast(
+                    err.error.message + '<br/>The error:<br/> ' +
+                    err.error.data.email + '<br/>' +
+                    err.error.data.c_password 
+                      );
+        //this.alertService.presentToast(err.error.data.email);
+        //this.alertService.presentToast(err.error.data.c_password);
       })
       // error => {
       //   console.log("errorx",error);
