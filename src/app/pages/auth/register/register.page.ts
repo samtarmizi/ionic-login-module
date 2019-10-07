@@ -65,6 +65,8 @@ export class RegisterPage implements OnInit {
         //alert(JSON.stringify(err.error.data.email));
         //err.error.data = this.data;
         //this.data = err.error.data;
+
+        // Check whether validation respone has value or not
         if(err.error.data.email == null){
           err.error.data.email = "";
         }
@@ -79,6 +81,7 @@ export class RegisterPage implements OnInit {
           err.error.data.c_password = "Please check your confirmation password. We believe the password has slightly different for our confirmation.";
         }
 
+        //output toast message
         this.alertService.presentToast(
                     err.error.message + '<br/>The error:<br/><br/>' +
                     err.error.data.email + '<br/><br/>' +

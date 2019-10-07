@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { LandingPage } from './landing.page';
-import { LoginPage } from '../auth/login/login.page';
+// import { LoginPage } from '../auth/login/login.page';
 // import { RegisterPage } from '../auth/register/register.page';
 
 const routes: Routes = [
@@ -23,10 +23,12 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LandingPage, LoginPage, 
+  declarations: [LandingPage,
+    //  LoginPage, 
     // RegisterPage
   ],
-  entryComponents: [LoginPage, 
+  entryComponents: [
+    // LoginPage, 
     // RegisterPage
   ]
 })

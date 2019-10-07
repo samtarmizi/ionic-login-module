@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, MenuController, NavController } from '@ionic/angular';
 // import { RegisterPage } from '../auth/register/register.page';
-import { LoginPage } from '../auth/login/login.page';
+// import { LoginPage } from '../auth/login/login.page';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -41,6 +41,7 @@ export class LandingPage implements OnInit {
   }
 
   async login() {
+    this.navCtrl.navigateForward('login');
     // const loginModal = await this.modalController.create({
     //   component: LoginPage,
     // });
