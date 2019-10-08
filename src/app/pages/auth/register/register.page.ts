@@ -40,11 +40,14 @@ export class RegisterPage implements OnInit {
 
   async register() {
     await this.authService.register( this.data.name, this.data.email, this.data.password, this.data.c_password)
-    .then(async data => {
+    .then(async (response:any) => {
         // this.navCtrl.navigateRoot('dashboard');
         // console.log('data xyz',await data);
-        // alert(JSON.stringify(data));
-        this.alertService.presentToast("Registered.<br>User name is " +  data.data.name);
+        // alert(JSON.stringify(response.data.name));
+        
+        this.alertService.presentToast("Registered.<br>User name is " +  response.data.name);
+        //this.alertService.presentToast("Registered.<br>User name is" );
+
         //this.alertService.presentToast(JSON.stringify(data.data.name));
 
         // await this.authService.login(form.value.email, form.value.password).subscribe(
