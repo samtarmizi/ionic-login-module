@@ -39,14 +39,21 @@ export class AuthService {
 
     return new Promise((resolve,reject)=>{
       this.http.post('https://mizi.monster/oauth/token',body,options)
-      .subscribe(res=>{
+      .subscribe((res:any)=>{
         console.log(res);
+        this.storage.setItem('token', res.access_token)
+        .then(
+          () => {
+            console.log('Token Stored');
+          },
+          error => console.error('Error storing item', error)
+        );
         resolve(res)
       },err=>{
         reject(err);
           //alert(JSON.stringify(err)); 
       })
-    })  
+    })
   }
 
   register(name: String, email: String, password: String, c_password: String) {
@@ -77,12 +84,12 @@ export class AuthService {
       })
     })   
   }
-  
+
   logout() {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this.http.get(this.env.API_URL + 'auth/logout', { headers: headers })
+    return this.http.post(this.env.API_URL + '/logout', { headers: headers })
     .pipe(
       tap(data => {
         this.storage.remove("token");
