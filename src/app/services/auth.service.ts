@@ -20,7 +20,6 @@ export class AuthService {
   ) { }
   
   login(email: String, password: String) {
-
     let httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Cache-Control': 'no-cache'
@@ -30,11 +29,6 @@ export class AuthService {
       headers: httpHeaders
     };
 
-//     var form = new FormData();
-// form.append("name", "Mizi");
-// form.append("email", "realrizisanui@gmail.com");
-// form.append("password", "12345678");
-// form.append("c_password", "12345678");
     let body={
       username:email,
       password:password,
@@ -43,8 +37,6 @@ export class AuthService {
       client_secret: "DyEdXq67JVPez9ln6WL7gTwBPwC6gX1yKF63M52I"
     }
 
-  
-
     return new Promise((resolve,reject)=>{
       this.http.post('https://mizi.monster/oauth/token',body,options)
       .subscribe(res=>{
@@ -52,18 +44,12 @@ export class AuthService {
         resolve(res)
       },err=>{
         reject(err);
-          //alert(JSON.stringify(err));
-        
+          //alert(JSON.stringify(err)); 
       })
-    })
-    
-      // {name: name, email: email, password: password, c_password: c_password}
-    
-    
+    })  
   }
 
   register(name: String, email: String, password: String, c_password: String) {
-
     let httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Cache-Control': 'no-cache'
@@ -73,19 +59,12 @@ export class AuthService {
       headers: httpHeaders
     };
 
-//     var form = new FormData();
-// form.append("name", "Mizi");
-// form.append("email", "realrizisanui@gmail.com");
-// form.append("password", "12345678");
-// form.append("c_password", "12345678");
     let body={
       name:name,
       email:email,
       password:password,
       c_password:c_password
     }
-
-  
 
     return new Promise((resolve,reject)=>{
       this.http.post('https://mizi.monster/api/register',body,options)
@@ -94,14 +73,11 @@ export class AuthService {
         resolve(res)
       },err=>{
         reject(err);
-        //alert(JSON.stringify(err));
-        
+        //alert(JSON.stringify(err)); 
       })
-    })
-    
-      // {name: name, email: email, password: password, c_password: c_password}
-    
+    })   
   }
+  
   logout() {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
